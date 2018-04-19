@@ -9,4 +9,8 @@ import Marquee from "../src/marquee";
 
 storiesOf("Welcome", module).add("to Storybook", () => <Welcome showApp={linkTo("Marquee")} />);
 
-storiesOf("Marquee", module).add("with text", () => <Marquee />);
+storiesOf("Marquee", module).add("with text", () => (
+  <Marquee>
+    <p style={{ background: "magenta", width: "300" }}>Yolo swag stuff barbecue</p>
+  </Marquee>
+));
