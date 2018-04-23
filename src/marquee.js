@@ -1,33 +1,21 @@
-/* eslint-disable react/no-multi-comp */
 import React from "react";
+import PropTypes from "prop-types";
+import RafWrapper from "./RAFWrapper";
 
 class Marquee extends React.Component {
   constructor(props) {
     super(props);
     this.animationElem = React.createRef();
-    this.startAnimation = this.startAnimation.bind(this);
     this.animationLoop = this.animationLoop.bind(this);
-
-    this.start = 0;
     this.progress = 0;
     this.boundingRect = {};
   }
+
   componentDidMount() {
     this.boundingRect = this.animationElem.current.getBoundingClientRect();
-    this.startAnimation();
   }
 
-  componentWillUnmount() {
-    this.stopAnimation();
-  }
-
-  startAnimation() {
-    if (!this.rafId) {
-      this.rafId = window.requestAnimationFrame(this.animationLoop);
-    }
-  }
-
-  animationLoop(timestamp) {
+  animationLoop() {
     const max = this.boundingRect.width + this.boundingRect.x;
     // TODO setup speed
     const delta = 2;
@@ -38,30 +26,35 @@ class Marquee extends React.Component {
 
     this.progress = progress;
 
-    // TODO prefix
-    this.animationElem.current.style.transform = `translate3d(${progress}px, 0, 0)`;
-    this.rafId = window.requestAnimationFrame(this.animationLoop);
+    // Most browsers >98% support webkitTransform and transform
+    const translateValue = `translate3d(${progress}px, 0, 0)`;
+    this.animationElem.current.style.transform = translateValue;
+    this.animationElem.current.style.webkitTransform = translateValue;
   }
-
-  stopAnimation() {
-    window.cancelAnimationFrame(this.rafId);
-  }
-
   render() {
-    // TODO break out
-    const RefRafWrapper = React.forwardRef((props, ref) => (
+    const WithForwardedRef = React.forwardRef((props, forwardedRef) => (
       <div
         style={{
           overflowX: "hidden",
         }}
-        ref={ref}
+        ref={forwardedRef}
       >
-        {props.children}
+        <RafWrapper ref={forwardedRef} onRaf={this.animationLoop}>
+          {this.props.children}
+        </RafWrapper>
       </div>
     ));
 
-    return <RefRafWrapper ref={this.animationElem}>{this.props.children}</RefRafWrapper>;
+    return <WithForwardedRef ref={this.animationElem}>{this.props.children}</WithForwardedRef>;
   }
 }
+
+Marquee.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+};
+
+Marquee.defaultProps = {
+  children: null,
+};
 
 export default Marquee;
