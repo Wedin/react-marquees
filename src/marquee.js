@@ -1,60 +1,64 @@
 import React from "react";
 import PropTypes from "prop-types";
 import RafWrapper from "./RAFWrapper";
+import { DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_DOWN } from "./constants";
+import { getAnimationModifier, getProgressModifier } from "./modifiers";
 
 class Marquee extends React.Component {
   constructor(props) {
     super(props);
     this.animationElem = React.createRef();
     this.animationLoop = this.animationLoop.bind(this);
+    this.animationModifier = getAnimationModifier(this.props.direction);
+    this.progressModifier = getProgressModifier(this.props.direction);
     this.progress = 0;
     this.boundingRect = {};
   }
 
   componentDidMount() {
-    this.boundingRect = this.animationElem.current.getBoundingClientRect();
+    // Get bounding of overflow elem, not animation element
+    this.boundingRect = this.animationElem.current.parentNode.getBoundingClientRect();
   }
 
   animationLoop() {
-    const max = this.boundingRect.width + this.boundingRect.x;
-    // TODO setup speed
-    const delta = 2;
-    let progress = this.progress + delta;
-    if (progress > max) {
-      progress = -this.boundingRect.width;
-    }
+    this.progress = this.progressModifier(this.progress, this.boundingRect, this.props.speed);
 
-    this.progress = progress;
-
-    // Most browsers >98% support webkitTransform and transform
-    const translateValue = `translate3d(${progress}px, 0, 0)`;
+    const translateValue = this.animationModifier(this.progress);
+    // Most browsers (>98%) support webkitTransform and transform
     this.animationElem.current.style.transform = translateValue;
     this.animationElem.current.style.webkitTransform = translateValue;
   }
   render() {
     const WithForwardedRef = React.forwardRef((props, forwardedRef) => (
-      <div
-        style={{
-          overflowX: "hidden",
-        }}
-        ref={forwardedRef}
-      >
-        <RafWrapper ref={forwardedRef} onRaf={this.animationLoop}>
+      <div ref={forwardedRef}>
+        <RafWrapper onRaf={this.animationLoop} passedRef={forwardedRef}>
           {this.props.children}
         </RafWrapper>
       </div>
     ));
 
-    return <WithForwardedRef ref={this.animationElem}>{this.props.children}</WithForwardedRef>;
+    return (
+      <div
+        style={{
+          overflow: "hidden",
+        }}
+      >
+        <WithForwardedRef ref={this.animationElem}>{this.props.children}</WithForwardedRef>
+      </div>
+    );
   }
 }
 
 Marquee.propTypes = {
   children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
+  direction: PropTypes.oneOf([DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_DOWN]),
+  speed: PropTypes.number,
 };
 
 Marquee.defaultProps = {
   children: null,
+  direction: DIRECTION_LEFT,
+  speed: 2,
 };
 
 export default Marquee;
