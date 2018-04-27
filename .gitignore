@@ -1,3 +1,4 @@
+.gitconfig
 logs
 *.log
 npm-debug.log*
