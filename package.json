@@ -1,7 +1,7 @@
 {
-  "name": "marquee",
+  "name": "react-marquees",
   "version": "1.0.0",
-  "description": "",
+  "description": "Marquee element implementation in React using requestAnimationFrame",
   "main": "index.js",
   "scripts": {
     "build-storybook": "build-storybook",
@@ -12,6 +12,11 @@
   },
   "author": "wedin <hej@danielwedin.se>",
   "license": "MIT",
+  "homepage": "https://github.com/Wedin/react-marquees",
+  "keywords": [
+    "react",
+    "marquee"
+  ],
   "dependencies": {},
   "peerDependencies": {
     "prop-types": "^15.6.1",
@@ -35,5 +40,9 @@
     "prop-types": "^15.6.1",
     "react": "^16.3.3",
     "react-dom": "^16.3.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wedin/react-marquees.git"
   }
 }
