@@ -1,6 +1,6 @@
-const DIRECTION_LEFT = "LEFT";
-const DIRECTION_RIGHT = "RIGHT";
-const DIRECTION_UP = "UP";
-const DIRECTION_DOWN = "DOWN";
+const DIRECTION_LEFT = "left";
+const DIRECTION_RIGHT = "right";
+const DIRECTION_UP = "up";
+const DIRECTION_DOWN = "down";
 
 export { DIRECTION_LEFT, DIRECTION_RIGHT, DIRECTION_UP, DIRECTION_DOWN };
