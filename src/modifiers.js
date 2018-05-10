@@ -37,7 +37,7 @@ const directionDown = (prevProgress, boundingRect, speed) => {
 };
 
 function getAnimationModifier(direction) {
-  const dir = direction.toUpperCase();
+  const dir = direction.toLowerCase();
   switch (dir) {
     case DIRECTION_LEFT:
     case DIRECTION_RIGHT:
@@ -51,7 +51,7 @@ function getAnimationModifier(direction) {
 }
 
 function getProgressModifier(direction) {
-  const dir = direction.toUpperCase();
+  const dir = direction.toLowerCase();
   switch (dir) {
     case DIRECTION_LEFT:
       return directionLeft;

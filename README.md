@@ -2,13 +2,6 @@
 
 > A Marquee element implementation in React using requestAnimationFrame
 
-## TODOs
-
-* [ ] Tests
-* [ ] Fix resize issue
-* [ ] ...
-* [ ] Profit
-
 ## Props
 
 ### direction

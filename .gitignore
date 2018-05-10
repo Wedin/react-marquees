@@ -1,3 +1,4 @@
+dist/
 .gitconfig
 logs
 *.log
