@@ -1,6 +1,6 @@
 {
   "name": "react-marquees",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Marquee element implementation in React using requestAnimationFrame",
   "main": "dist/index.js",
   "module": "dist/index.es.js",
@@ -21,8 +21,7 @@
     "react",
     "marquee"
   ],
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^16.3.0",
     "react-dom": "^16.3.0",
