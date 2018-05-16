@@ -18,20 +18,22 @@
   "license": "MIT",
   "homepage": "https://github.com/Wedin/react-marquees",
   "keywords": [
+    "marquee",
     "react",
-    "marquee"
+    "requestAnimationFrame",
+    "forwardRef"
   ],
   "dependencies": {},
   "peerDependencies": {
+    "prop-types": "^15.0.0",
     "react": "^16.3.0",
-    "react-dom": "^16.3.0",
-    "prop-types": "^15.0.0"
+    "react-dom": "^16.3.0"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "^3.4.2",
-    "@storybook/addon-info": "^3.4.2",
-    "@storybook/addons": "^3.4.2",
-    "@storybook/react": "^3.4.2",
+    "@storybook/addon-actions": "^3.4.4",
+    "@storybook/addon-info": "^3.4.4",
+    "@storybook/addons": "^3.4.4",
+    "@storybook/react": "^3.4.4",
     "babel-core": "^6.26.0",
     "babel-plugin-external-helpers": "^6.22.0",
     "babel-runtime": "^6.26.0",
@@ -40,12 +42,12 @@
     "eslint-config-prettier": "^2.9.0",
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint-plugin-react": "^7.8.2",
     "prettier": "^1.12.1",
     "prop-types": "^15.6.1",
     "react": "^16.3.2",
     "react-dom": "^16.3.2",
-    "rollup": "^0.58.2",
+    "rollup": "^0.59.1",
     "rollup-plugin-babel": "^3.0.4",
     "rollup-plugin-commonjs": "^9.1.3",
     "rollup-plugin-node-resolve": "^3.3.0",
